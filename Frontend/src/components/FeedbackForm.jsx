@@ -6,14 +6,13 @@ const FeedbackForm = ({ refreshFeedbacks, feedbackToEdit }) => {
   const [content, setContent] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
-  // If feedbackToEdit is provided, we set it for editing mode
   useEffect(() => {
     if (feedbackToEdit) {
       setContent(feedbackToEdit.content);
       setIsEditing(true);
     } else {
       setIsEditing(false);
-      setContent(""); // Reset content if not editing
+      setContent(""); 
     }
   }, [feedbackToEdit]);
 
@@ -22,22 +21,22 @@ const FeedbackForm = ({ refreshFeedbacks, feedbackToEdit }) => {
     try {
       // eslint-disable-next-line no-unused-vars
       const token = localStorage.getItem("token");
-      console.log("Submitting feedback with content:", content); // Debugging
+      console.log("Submitting feedback with content:", content); 
   
       if (isEditing && feedbackToEdit) {
-        console.log("Updating feedback with ID:", feedbackToEdit._id); // Debugging
+        console.log("Updating feedback with ID:", feedbackToEdit._id);
         await api.put(`/feedbacks/${feedbackToEdit._id}`, { content });
         alert("Feedback updated successfully!");
       } else {
-        console.log("Creating new feedback"); // Debugging
+        console.log("Creating new feedback"); 
         await api.post("/feedbacks", { content });
         alert("Feedback submitted successfully!");
       }
   
       setContent("");
-      if (refreshFeedbacks) refreshFeedbacks(); // Refresh feedback list
+      if (refreshFeedbacks) refreshFeedbacks(); 
     } catch (error) {
-      console.error("Error submitting feedback:", error); // Debugging
+      console.error("Error submitting feedback:", error);
       alert(
         "Failed to submit feedback: " +
         (error.response?.data?.message || error.message)
@@ -52,12 +51,11 @@ const FeedbackForm = ({ refreshFeedbacks, feedbackToEdit }) => {
           {isEditing ? "Edit Feedback" : "Add Feedback"}
         </h2>
 
-        {/* Buttons to switch between Add and Edit feedback */}
         <div className="flex justify-between mb-6">
           <button
             onClick={() => {
               setIsEditing(false);
-              setContent(""); // Clear the content when switching to Add mode
+              setContent(""); 
             }}
             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
           >
@@ -93,11 +91,11 @@ const FeedbackForm = ({ refreshFeedbacks, feedbackToEdit }) => {
 
 // Add prop types validation
 FeedbackForm.propTypes = {
-  refreshFeedbacks: PropTypes.func.isRequired,  // refreshFeedbacks should be a function
+  refreshFeedbacks: PropTypes.func.isRequired,  
   feedbackToEdit: PropTypes.shape({
     _id: PropTypes.string,
     content: PropTypes.string,
-  }), // feedbackToEdit should be an object with _id and content, or null
+  }), 
 };
 
 export default FeedbackForm;

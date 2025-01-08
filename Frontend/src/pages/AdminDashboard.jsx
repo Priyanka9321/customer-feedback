@@ -35,12 +35,12 @@ const AdminDashboard = () => {
     }
   };
 
-  // Edit feedback - Navigates to the edit page with the feedback ID
+  // Edit feedback
   const handleEdit = (id) => {
     navigate(`/admin/edit-feedback/${id}`);
   };
 
-  // View feedback - Navigates to the view page with the feedback ID
+  // View feedback
   const handleView = (id) => {
     navigate(`/admin/view-feedback/${id}`);
   };

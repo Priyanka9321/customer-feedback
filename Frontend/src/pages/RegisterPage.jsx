@@ -7,10 +7,10 @@ const RegisterForm = () => {
     username: "",
     email: "",
     password: "",
-    confirmPassword: "", // Added confirmPassword field
+    confirmPassword: "", 
   });
 
-  const [error, setError] = useState(""); // Error message state
+  const [error, setError] = useState(""); 
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,7 +19,6 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if required fields are filled
     if (
       !formData.username ||
       !formData.email ||
@@ -30,12 +29,11 @@ const RegisterForm = () => {
       return;
     }
 
-    // Check if password and confirm password match
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       return;
     } else {
-      setError(""); // Clear any previous error
+      setError("");
     }
 
     try {
@@ -55,10 +53,9 @@ const RegisterForm = () => {
           email: "",
           password: "",
           confirmPassword: "",
-        }); // Reset all fields
+        }); 
       }
     } catch (error) {
-      // Handle errors from the backend
       alert(
         "Registration failed: " + error.response?.data?.message || error.message
       );
@@ -109,7 +106,7 @@ const RegisterForm = () => {
             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
           />
           {error && <p className="text-red-500 text-sm">{error}</p>}{" "}
-          {/* Error message display */}
+       
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"

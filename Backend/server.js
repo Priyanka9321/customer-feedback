@@ -1,39 +1,40 @@
-require('dotenv').config(); // Add dotenv to load environment variables
-const express = require('express');
-const mongoose = require('mongoose');
-const userRoute = require('./routes/userRouter'); // Import user route
+require("dotenv").config();
+const express = require("express");
+const userRoute = require("./routes/userRouter");
 const feedbackRouter = require("./routes/feedbackRouter");
-const cors = require('cors');
+const connectDB = require("./config/db");
+const cors = require("cors");
+const path = require("path");
+
+// Set up your MongoDB connection (example)
+connectDB();
 const app = express();
 
 // Middleware to parse incoming JSON
 app.use(express.json());
 
-// Enable CORS if necessary
-// Allow CORS for frontend running on localhost:5173
-const corsOptions = {
-  origin: 'http://localhost:5173', // Allow only requests from localhost:5173
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // You can customize the allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
-};
-
-app.use(cors(corsOptions)); // Enable CORS with the specified options
+app.use(cors());
 
 // Register routes
-app.use('/api/users', userRoute);
-
+app.use("/api/users", userRoute);
 app.use("/api/feedbacks", feedbackRouter);
 
-// Set up your MongoDB connection (example)
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => {
-    console.error('MongoDB connection error:', err.message);
-    process.exit(1); 
-  });
 
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+// deployment
+const _dirname = path.resolve();
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(_dirname, "../Frontend/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(_dirname, "Frontend", "dist", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running.....");
+  });
+}

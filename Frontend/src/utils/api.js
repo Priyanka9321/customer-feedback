@@ -18,7 +18,7 @@ api.interceptors.request.use((config) => {
 
 // Error handling for global response errors
 api.interceptors.response.use(
-  (response) => response, // Return the response directly if successful
+  (response) => response, 
   (error) => {
     if (error.response && error.response.status === 401) {
       alert("Session expired. Please log in again.");

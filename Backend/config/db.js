@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const connectDB = async () => {
   if (!process.env.MONGO_URI) {
@@ -8,7 +8,6 @@ const connectDB = async () => {
 
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI, {
-      // New default settings in mongoose 6, but added here for clarity
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

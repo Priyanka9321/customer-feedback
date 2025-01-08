@@ -6,7 +6,7 @@ const FeedbackPage = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [feedbackToEdit, setFeedbackToEdit] = useState(null);
 
-  // Fetch all feedbacks from the API
+  // Fetch all feedbacks
   const refreshFeedbacks = async () => {
     const response = await api.get("/feedbacks");
     setFeedbacks(response.data);

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import api from '../utils/api';
 
 const ViewFeedback = () => {
-  const { id } = useParams(); // Get the feedback ID from the URL
+  const { id } = useParams(); 
   const [feedback, setFeedback] = useState(null);
 
   useEffect(() => {

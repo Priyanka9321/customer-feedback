@@ -10,8 +10,7 @@ const LoginForm = () => {
     password: "",
   });
 
-  const navigate = useNavigate(); // Initialize useNavigate hook
-
+  const navigate = useNavigate(); 
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,14 +19,13 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post("/users/login", formData); // Ensure this is the correct endpoint
+      const response = await api.post("/users/login", formData); 
       localStorage.setItem("token", response.data.token);
       alert("Login successful!");
       setFormData({ email: "", password: "" });
-      // Redirect to feedback page after successful login
-      navigate("/Feedback");  // Replace with the actual route for the feedback page
+      navigate("/Feedback");
     } catch (error) {
-      console.error("Login error:", error); // Log the error for debugging
+      console.error("Login error:", error); 
       alert("Login failed: " + error.response?.data?.message || error.message);
     }
   };

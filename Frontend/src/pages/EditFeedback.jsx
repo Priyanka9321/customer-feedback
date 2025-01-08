@@ -7,7 +7,7 @@ const EditFeedback = () => {
   const navigate = useNavigate();
   const [feedback, setFeedback] = useState({ content: "" });
 
-  // Fetch the feedback for editing
+  // Fetch the feedback 
   const fetchFeedback = async () => {
     const token = localStorage.getItem('token');
     try {
@@ -23,7 +23,7 @@ const EditFeedback = () => {
     const token = localStorage.getItem('token');
     try {
       await api.put(`/feedbacks/${id}`, feedback, { headers: { Authorization: `Bearer ${token}` } });
-      navigate('/admin'); // Redirect to admin dashboard after editing
+      navigate('/admin'); 
     } catch (error) {
       console.error("Error updating feedback:", error);
     }
